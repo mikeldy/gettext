@@ -30,7 +30,7 @@ module GetText
     end
 
     def parse(file, targets = []) # :nodoc:
-      src = ERB.new(IO.readlines(file).join).src
+      src = ERB.new(IO.readlines(file).join).src.force_encoding('utf-8')
       # Remove magic comment prepended by erb in Ruby 1.9.
       src.sub!(/\A#.*?coding[:=].*?\n/, '') if src.respond_to?(:encode)
       erb = src.split(/$/)
