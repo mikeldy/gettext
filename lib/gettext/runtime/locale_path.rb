@@ -54,12 +54,18 @@ module GetText
 
         load_path = $LOAD_PATH.dup
         if defined? ::Gem
-          paths_to_latest_gems = []
-          latest_specs = Gem::Specification.each do |spec|
-            paths_to_latest_gems << spec.gem_dir if spec.activated
-          end
+          if Gem::Version.new(RubyGems::Version) >= Gem::Version.new("1.8.0")
+            paths_to_latest_gems = []
+            latest_specs = Gem::Specification.each do |spec|
+              paths_to_latest_gems << spec.gem_dir if spec.activated
+            end
 
-          load_path += paths_to_latest_gems
+            load_path += paths_to_latest_gems
+          else
+            # NOTE: It's not exactly the same thing as the code above
+            # but it's the original gettext behavior
+            load_path += Gem.all_load_paths
+          end
         end
         load_path.map!{|v| v.respond_to?("match") and  v.match(/(.*?)(\/lib)*?$/); $1}
         load_path.each {|path|
