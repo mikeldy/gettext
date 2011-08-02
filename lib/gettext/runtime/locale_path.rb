@@ -54,13 +54,13 @@ module GetText
 
         load_path = $LOAD_PATH.dup
         if defined? ::Gem
-          if Gem::Version.new(RubyGems::Version) >= Gem::Version.new("1.8.0")
-            paths_to_latest_gems = []
-            latest_specs = Gem::Specification.each do |spec|
-              paths_to_latest_gems << spec.gem_dir if spec.activated
+          if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new("1.8.0")
+            paths_to_active_gems = []
+            Gem::Specification.each do |spec|
+              paths_to_active_gems << spec.gem_dir if spec.activated
             end
 
-            load_path += paths_to_latest_gems
+            load_path += paths_to_active_gems
           else
             # NOTE: It's not exactly the same thing as the code above
             # but it's the original gettext behavior
