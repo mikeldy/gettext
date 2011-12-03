@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gettext}
-  s.version = "2.0.0"
+  s.version = "2.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Masao Mutoh"]
-  s.date = %q{2009-02-06}
+  s.date = %q{2009-11-14}
   s.description = %q{Ruby-GetText-Package is a GNU GetText-like program for Ruby. The catalog file(po-file) is same format with GNU GetText. So you can use GNU GetText tools for maintaining.}
   s.email = %q{mutomasa at gmail.com}
   s.executables = ["rgettext", "rmsgmerge", "rmsgfmt"]
