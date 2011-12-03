@@ -189,6 +189,14 @@ end
 
 task :package => [:makemo]
 
+task :gemspec do
+  spec.validate
+  File.open("gettext.gemspec", 'w') do |file|
+    file << spec.to_ruby
+    file << "# AUTOMATICALLY GENERATED FILE. DO NOT MODIFY. MAKE CHANGES IN Rakefile AND REGENERATE WITH `rake gemspec`\n"
+  end
+end
+
 ############################################################
 # Misc tasks
 ############################################################
