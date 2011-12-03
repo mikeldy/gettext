@@ -161,18 +161,32 @@ spec = Gem::Specification.new do |s|
   s.author = 'Masao Mutoh'
   s.email = 'mutomasa at gmail.com'
   s.homepage = 'http://gettext.rubyforge.org/'
+  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "GetText", "--main", "README.rdoc"]
   s.rubyforge_project = "gettext"
   s.files = FileList['**/*'].to_a.select{|v| v !~ /pkg|CVS/}
+  s.extra_rdoc_files = [
+    "lib/gettext.rb",
+    "lib/gettext/tools.rb",
+    "lib/gettext/core_ext/string.rb",
+    "lib/gettext/version.rb",
+    "README.rdoc"
+  ]
   s.require_path = 'lib'
   s.executables = Dir.entries('bin').delete_if {|item| /^\.|CVS|~$/ =~ item }
   s.bindir = 'bin'
-  s.add_dependency('locale', '>= 2.0.5')
+  s.required_rubygems_version = '>= 1.2'
+  s.add_dependency('locale', '>= 2.0.5') # NOTE: rgettext does not work with locale < 2.0.6 (not released yet)
+  s.add_dependency('echoe')
   s.has_rdoc = true
-  s.description = <<-EOF
-        Ruby-GetText-Package is a GNU GetText-like program for Ruby.
-        The catalog file(po-file) is same format with GNU GetText.
-        So you can use GNU GetText tools for maintaining.
-  EOF
+  s.description = "Ruby-GetText-Package is a GNU GetText-like program for Ruby. The catalog file(po-file) is same format with GNU GetText. So you can use GNU GetText tools for maintaining."
+  s.test_files = [
+    "test/test_textdomain_toplevel.rb",
+    "test/test_gettext.rb",
+    "test/test_parser.rb",
+    "test/test_string.rb",
+    "test/test_class_info.rb",
+    "test/test_textdomain_multi.rb"
+  ]
 end
 
 Rake::PackageTask.new("ruby-gettext-package", PKG_VERSION) do |o|
