@@ -176,7 +176,7 @@ spec = Gem::Specification.new do |s|
   s.bindir = 'bin'
   s.required_rubygems_version = '>= 1.2'
   s.add_dependency('locale', '>= 2.0.5') # NOTE: rgettext does not work with locale < 2.0.6 (not released yet)
-  s.add_dependency('echoe')
+  s.add_development_dependency('echoe')
   s.has_rdoc = true
   s.description = "Ruby-GetText-Package is a GNU GetText-like program for Ruby. The catalog file(po-file) is same format with GNU GetText. So you can use GNU GetText tools for maintaining."
   s.test_files = [
