@@ -25,14 +25,11 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<locale>, [">= 2.0.5"])
-      s.add_development_dependency(%q<echoe>, [">= 0"])
     else
       s.add_dependency(%q<locale>, [">= 2.0.5"])
-      s.add_dependency(%q<echoe>, [">= 0"])
     end
   else
     s.add_dependency(%q<locale>, [">= 2.0.5"])
-    s.add_dependency(%q<echoe>, [">= 0"])
   end
 end
 # AUTOMATICALLY GENERATED FILE. DO NOT MODIFY. MAKE CHANGES IN Rakefile AND REGENERATE WITH `rake gemspec`
