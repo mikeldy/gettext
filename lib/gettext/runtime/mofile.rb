@@ -43,8 +43,8 @@ module GetText
       :trans_sysdep_tab_offset
     end
 
-    MAGIC_BIG_ENDIAN    = "\x95\x04\x12\xde"
-    MAGIC_LITTLE_ENDIAN = "\xde\x12\x04\x95"
+    MAGIC_BIG_ENDIAN    = "\x95\x04\x12\xde".force_encoding(Encoding::ASCII_8BIT)
+    MAGIC_LITTLE_ENDIAN = "\xde\x12\x04\x95".force_encoding(Encoding::ASCII_8BIT)
 
     def self.open(arg = nil, output_charset = nil)
       result = self.new(output_charset)
@@ -149,7 +149,10 @@ module GetText
         else
           if @output_charset
             begin
-              str = Iconv.conv(@output_charset, @charset, str) if @charset
+              if @charset
+                str = Iconv.conv(@output_charset, @charset, str)
+                original_strings[i] = Iconv.conv(@output_charset, @charset, original_strings[i])
+              end
             rescue Iconv::Failure
               if $DEBUG
                 warn "@charset = ", @charset
