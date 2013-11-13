@@ -121,7 +121,7 @@ module GetText
       original_strings = Array.new(header.nstrings)
       for i in 0...header.nstrings
         io.pos = orig_table_data[i * 2 + 1]
-        original_strings[i] = io.read(orig_table_data[i * 2 + 0])
+        original_strings[i] = io.read(orig_table_data[i * 2 + 0]).force_encoding(Encoding::UTF_8)
       end
 
       clear
@@ -163,7 +163,7 @@ module GetText
             end
           end
         end
-        self[original_strings[i]] = str.freeze
+        self[original_strings[i]] = str.force_encoding(Encoding::UTF_8).freeze
       end
       self
     end
